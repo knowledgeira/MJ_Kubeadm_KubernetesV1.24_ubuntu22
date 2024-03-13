@@ -4,25 +4,15 @@
 set +x
 
 echo "-------------------------------------------1.Installing Kublet,kubeadm,kubectl----------------------------------------------------------------------"
-   # Update the apt package index and install packages needed to use the Kubernetes apt repository:
-
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
-    #Download the Google Cloud public signing key:
 
-sudo mkdir /etc/apt/keyrings
-sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-
-
-#Add the Kubernetes apt repository:
-
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-#Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
-sudo apt install -y kubelet=1.27.3-00 kubeadm=1.27.3-00 kubectl=1.27.3-00
+sudo apt install -y kubeadm=1.29.1-1.1 kubelet=1.29.1-1.1 kubectl=1.29.1-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 
 
