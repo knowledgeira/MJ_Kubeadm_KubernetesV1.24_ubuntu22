@@ -105,8 +105,8 @@ sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication
 #!/bin/bash
 set -x
 
-# Step 1: Create the k8-lab namespace
-kubectl create namespace k8-lab || true  # Ensure the namespace exists
+# Step 1: Create the k8s-lab namespace
+kubectl create namespace k8s-lab || true  # Ensure the namespace exists
 
 # Function to create a Pod within k8-lab namespace with the given name, image, labels, and optional environment variables
 create_pod() {
@@ -168,8 +168,8 @@ create_pod nginx-pod "nginx:latest" "$LABELS_NGINX"
 create_pod mongodb-pod "mongo:latest" "$LABELS_MONGODB"
 create_pod busybox-pod "busybox:latest" "$LABELS_BUSYBOX"
 
-# Network policies for k8-lab namespace
-kubectl apply -n k8-lab -f - <<EOF
+# Network policies for k8s-lab namespace
+kubectl apply -n k8s-lab -f - <<EOF
 # Allow all ingress traffic within the namespace
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -231,7 +231,7 @@ EOF
 
 # Additional network policies can be defined following the same pattern
 
-echo "Pods and network policies created in namespace k8-lab."
+echo "Pods and network policies created in namespace k8s-lab."
 
 
 
