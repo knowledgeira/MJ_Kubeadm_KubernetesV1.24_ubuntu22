@@ -68,3 +68,7 @@ echo "------------------------------------------------"
 sleep 30
 vagrant up
 vagrant status
+
+echo -e "Use vagrant ssh to k8sMaster and use below commands on master node for verification of Pods,Networkpolicies and Namespaces"
+echo -e "kubectl get networkpolicies -n k8s-lab"
+echo -e "kubectl get pods -n k8s-labs"
